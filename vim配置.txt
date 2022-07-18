@@ -1,0 +1,37 @@
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'mhinz/vim-startify'
+Plug 'connorholyday/vim-snazzy'
+Plug 'itchyny/vim-cursorword'
+Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+nnoremap <F5> :bot term ++rows=5 <CR>
+set number
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+let NERDTreeShowHidden=1
+"==================================coc.nvim=============================
+let g:coc_global_extensions =[
+                        \'coc-json',
+                        \'coc-tsserver',
+                        \'coc-pyright',
+                        \'coc-phpls',
+                        \'coc-vimlsp',
+                        \'coc-clangd',
+                        \'coc-marketplace',
+                        \'coc-sh',
+                        \'coc-lightbulb']
+set hidden
+set updatetime=300
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-referenceas)
